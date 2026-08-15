@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Farheen!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: linear-gradient(135deg, #1a0b14, #3d152a, #2a081c);
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* FLOATING HEARTS STYLES */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2rem;
+            filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.8));
+            animation: floatUp 6s linear infinite;
+            user-select: none;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.9; }
+            100% { transform: translateY(-115vh) scale(1.1) rotate(360deg); opacity: 0; }
+        }
+
+        .slide { display: none; width: 100%; max-width: 450px; flex-direction: column; align-items: center; animation: fadeIn 0.5s ease-in-out; position: relative; z-index: 2; }
+        .slide.active { display: flex; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .neon-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px #ff1493, 0 0 20px #ff69b4, 0 0 30px #ff1493;
+            animation: pulseGlow 2s infinite alternate;
+            margin-bottom: 5px;
+        }
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 8px #ff69b4, 0 0 15px #ff1493; }
+            100% { text-shadow: 0 0 15px #ff69b4, 0 0 30px #ff1493, 0 0 45px #ff1493; }
+        }
+        .subtitle { font-size: 1.2rem; color: #ffb6c1; margin-bottom: 20px; font-weight: 600; }
+        .glass-card {
+            background: rgba(45, 15, 32, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 105, 180, 0.4);
+            padding: 30px 20px;
+            border-radius: 30px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .question-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; color: #ffccd5; }
+        .btn-group { display: flex; gap: 12px; justify-content: center; width: 100%; }
+        
+        .btn-option {
+            background: rgba(60, 20, 45, 0.9);
+            border: 2px solid #ff1493;
+            color: #ffb6c1;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            flex: 1;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-option:hover { background: #ff1493; color: #fff; transform: translateY(-3px); }
+        .popup-msg { margin-top: 15px; font-size: 1.1rem; color: #ffb6c1; font-weight: 600; }
+        
+        .btn {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,20,147,0.4);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,20,147,0.6); }
+
+        /* REALISTIC CAKE DESIGN */
+        .cake-wrapper { margin: 25px auto; cursor: pointer; display: flex; flex-direction: column; align-items: center; position: relative; width: 220px; }
+        .candle-group { display: flex; gap: 22px; margin-bottom: -4px; z-index: 5; }
+        .candle { width: 10px; height: 45px; background: repeating-linear-gradient(0deg, #fff, #fff 5px, #ff1493 5px, #ff1493 10px); border-radius: 3px; position: relative; }
+        .flame { width: 14px; height: 22px; background: radial-gradient(circle, #fffa65 0%, #ff4d4d 80%); border-radius: 50% 50% 20% 20%; position: absolute; top: -20px; left: -2px; box-shadow: 0 0 12px #fffa65; animation: flicker 0.35s infinite alternate ease-in-out; }
+        @keyframes flicker { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.15); opacity: 1; } }
+        .flame.extinguished { display: none; }
+        
+        .cake-tier { position: relative; margin: 0 auto; border-radius: 14px; box-shadow: inset 0 6px 8px rgba(255,255,255,0.4), 0 8px 15px rgba(0,0,0,0.3); }
+        .tier-top { width: 140px; height: 48px; background: linear-gradient(90deg, #ff3385, #ff66b2, #ff3385); z-index: 3; border-top: 5px solid #fff; }
+        .tier-mid { width: 180px; height: 52px; background: linear-gradient(90deg, #e60073, #ff1493, #e60073); z-index: 2; margin-top: -3px; border-top: 4px solid #fff; }
+        .tier-bottom { width: 220px; height: 58px; background: linear-gradient(90deg, #c71585, #db7093, #c71585); z-index: 1; margin-top: -3px; border-top: 4px solid #fff; border-radius: 0 0 16px 16px; }
+        
+        .cherry-top { position: absolute; width: 14px; height: 14px; background: #ff0033; border-radius: 50%; top: -18px; box-shadow: inset -2px -2px 4px rgba(0,0,0,0.5), 0 0 6px #ff0033; }
+        .c1 { left: 45px; } .c2 { right: 45px; }
+
+        .gift-box { font-size: 5rem; cursor: pointer; margin: 15px 0; animation: bounce 1.5s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .reveal-box { background: rgba(45, 15, 32, 0.9); padding: 20px; border-radius: 20px; border: 2px solid #ff1493; }
+        .reveal-image { width: 100%; height: 250px; object-fit: contain; border-radius: 12px; background: rgba(0,0,0,0.3); margin-bottom: 12px; border: 1px solid #ff69b4; }
+
+        .aesthetic-envelope { width: 180px; height: 130px; background: #8c2352; margin: 25px auto; border-radius: 12px; position: relative; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; transition: 0.4s; border: 2px solid #d4af37; }
+        .aesthetic-envelope:hover { transform: scale(1.05); }
+
+        .luxury-paper { background: #fffdf5; color: #2b1d24; padding: 30px 22px; border-radius: 10px; border: 8px double #d4af37; box-shadow: 0 0 0 1px #d4af37 inset, 0 15px 40px rgba(0,0,0,0.6); font-family: 'Poppins', sans-serif; font-size: 1.05rem; line-height: 1.6; text-align: left; animation: popInLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes popInLetter { 0% { transform: scale(0.8) rotateX(-15deg); opacity: 0; } 100% { transform: scale(1) rotateX(0deg); opacity: 1; } }
+
+        /* TYPEWRITER CURSOR EFFECT */
+        .typing-text::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            color: #ff1493;
+            font-weight: bold;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- HEARTS CONTAINER -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" id="slide1">
+        <h1 class="neon-title">Happy Birthday</h1>
+        <div class="subtitle">Farheen (tufan) 😆</div>
+        <div class="glass-card">
+            <div class="question-text" id="qText">Are u happy? 🤔</div>
+            <div class="btn-group" id="initialBtns">
+                <button class="btn-option" id="yesBtn">Yes</button>
+                <button class="btn-option" id="noBtn">No</button>
+            </div>
+            <div id="actionArea" style="display:none;">
+                <div class="popup-msg" id="happyPopup"></div>
+                <button class="btn" id="continueBtn">Continue ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" id="slide2">
+        <h1 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ff69b4;">Blow the Candle</h1>
+        <div class="glass-card">
+            <div style="font-size: 0.95rem; color: #ffccd5; margin-bottom: 8px;">"Aaram se fukna, tufan mat laa dena! 🌪️"</div>
+            <div id="timer-display" style="font-size: 2.2rem; color: #ff69b4; margin: 5px 0; font-weight: 700;">Ready?</div>
+            <div class="cake-wrapper" id="cakeWrapper">
+                <div class="candle-group">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
+                <div style="position:relative; width: 100%;">
+                    <div class="cherry-top c1"></div>
+                    <div class="cherry-top c2"></div>
+                    <div class="cake-tier tier-top"></div>
+                </div>
+                <div class="cake-tier tier-mid"></div>
+                <div class="cake-tier tier-bottom"></div>
+            </div>
+            <button class="btn" id="blowBtn">Blow Candles 🎂</button>
+        </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" id="slide3">
+        <h1 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: #ff69b4;">Surprise!</h1>
+        <div class="glass-card" id="giftCardSection">
+            <div style="font-size: 1.15rem; color: #ffccd5; margin-bottom: 10px;">Tap your secret gift! 🎁</div>
+            <div class="gift-box" id="giftBox">🎁</div>
+        </div>
+        <div class="reveal-box" id="revealBox" style="display:none;">
+            <img src="IMG_20250913_225555_088.jpg" alt="Meme" class="reveal-image">
+            <div style="font-size: 1.3rem; font-weight: 700; color: #ff1493; margin-bottom: 5px;">"FAAAH! 😂"</div>
+            <button class="btn" id="giftContinueBtn">Aage badho 😹</button>
+        </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" id="slide4">
+        <h1 style="font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #ff69b4; margin-bottom: 10px;">A Special Note 💌</h1>
+        <div class="glass-card">
+            <div id="envelopeView" class="aesthetic-envelope" onclick="openLetter()">💌</div>
+            <div id="letterView" style="display: none;">
+                <div class="luxury-paper">
+                    <strong style="font-size: 1.2rem; color: #ff1493;">Happy birthday 🎉 Tapri😹</strong><br><br>
+                    <span id="typewriter" class="typing-text"></span>
+                </div>
+                <button class="btn" id="letterContinueBtn" style="margin-top: 20px; width: 100%; display: none;">Yaha click kro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" id="slide5">
+        <div class="glass-card">
+            <h1 style="font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ff69b4; margin-bottom: 15px;">Kaisa laga mera mazak? 🤔</h1>
+            <div class="btn-group" id="feedbackBtnGroup">
+                <button class="btn-option" id="galizBtn">Galiz tha</button>
+                <button class="btn-option" id="achchaBtn">Achcha tha</button>
+            </div>
+            <div id="feedbackPopup" class="popup-msg" style="display: none; font-size: 1.2rem; color: #ffb6c1; margin: 15px 0;"></div>
+            <button class="btn" id="replaysBtn" style="display: none;">Replay 🔄</button>
+        </div>
+    </div>
+
+    <audio id="memeSound" src="https://www.myinstants.com/media/sounds/faah.mp3" preload="auto"></audio>
+
+    <script>
+        // FLOATING HEARTS SCRIPT
+        const heartsContainer = document.getElementById('heartsContainer');
+        const heartSymbols = ['❤️', '💖', '💗', '💓', '💕', '✨'];
+        
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.classList.add('heart');
+            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 95 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2.5 + 4.5) + 's';
+            heart.style.fontSize = (Math.random() * 0.6 + 1.8) + 'rem';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6500);
+        }
+        setInterval(createHeart, 350);
+
+        function showSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+        }
+
+        const initialBtns = document.getElementById('initialBtns');
+        const actionArea = document.getElementById('actionArea');
+        const popup = document.getElementById('happyPopup');
+
+        function handleSelection(msg) {
+            initialBtns.style.display = 'none';
+            document.getElementById('qText').style.display = 'none';
+            popup.innerText = msg;
+            actionArea.style.display = 'block';
+        }
+
+        document.getElementById('yesBtn').addEventListener('click', () => handleSelection("Good girlll 😄"));
+        document.getElementById('noBtn').addEventListener('click', () => handleSelection("Hmm 🤔 Gift dekh ke khush ho jayegi 😼"));
+        document.getElementById('continueBtn').addEventListener('click', () => showSlide(2));
+
+        // Slide 2 logic
+        const timerDisplay = document.getElementById('timer-display');
+        const blowBtn = document.getElementById('blowBtn');
+        const cakeWrapper = document.getElementById('cakeWrapper');
+
+        function triggerCelebration() {
+            if(timerDisplay.dataset.running === "true") return;
+            timerDisplay.dataset.running = "true";
+            blowBtn.style.display = 'none';
+            let count = 3;
+            timerDisplay.innerText = count;
+            let interval = setInterval(() => {
+                count--;
+                if(count > 0) {
+                    timerDisplay.innerText = count;
+                } else {
+                    clearInterval(interval);
+                    timerDisplay.innerText = "Make a Wish! 🥳";
+                    document.querySelectorAll('.flame').forEach(f => f.classList.add('extinguished'));
+                    if(typeof confetti === 'function') confetti({ particleCount: 130, spread: 90, origin: { y: 0.6 } });
+                    setTimeout(() => showSlide(3), 1000);
+                }
+            }, 1000);
+        }
+        blowBtn.addEventListener('click', triggerCelebration);
+        cakeWrapper.addEventListener('click', triggerCelebration);
+
+        // Slide 3 logic
+        document.getElementById('giftBox').addEventListener('click', () => {
+            document.getElementById('giftCardSection').style.display = 'none';
+            document.getElementById('revealBox').style.display = 'block';
+            if(typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            const sound = document.getElementById('memeSound');
+            if(sound) sound.play().catch(e => {});
+        });
+        document.getElementById('giftContinueBtn').addEventListener('click', () => showSlide(4));
+
+        // Slide 4 Typewriter Logic
+        const letterText = "Tapri tum khush rho aur sab ko rehne do 😝 aaj ka din achcha ho tumhara, aur tum humko momo khilao😆 bas itna hi bakna tha...!!\n\nTab tak savdhan rho aur satark rho😼";
+
+        function openLetter() {
+            document.getElementById('envelopeView').style.display = 'none';
+            document.getElementById('letterView').style.display = 'block';
+            if(typeof confetti === 'function') confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
+            
+            let index = 0;
+            const target = document.getElementById('typewriter');
+            target.innerHTML = "";
+            
+            function typeNextChar() {
+                if (index < letterText.length) {
+                    let char = letterText.charAt(index);
+                    if (char === '\n') {
+                        target.innerHTML += '<br>';
+                    } else {
+                        target.innerHTML += char;
+                    }
+                    index++;
+                    setTimeout(typeNextChar, 45); // Typing speed in milliseconds
+                } else {
+                    target.classList.remove('typing-text'); // Remove blinking cursor when done
+                    document.getElementById('letterContinueBtn').style.display = 'block';
+                }
+            }
+            typeNextChar();
+        }
+        document.getElementById('letterContinueBtn').addEventListener('click', () => showSlide(5));
+
+        // Slide 5 logic
+        const feedbackGroup = document.getElementById('feedbackBtnGroup');
+        const feedbackPopup = document.getElementById('feedbackPopup');
+        const replaysBtn = document.getElementById('replaysBtn');
+
+        document.getElementById('galizBtn').addEventListener('click', () => {
+            feedbackGroup.style.display = 'none';
+            feedbackPopup.innerText = "Arehh Galiz kaise ho skta h😤";
+            feedbackPopup.style.display = 'block';
+            replaysBtn.style.display = 'inline-block';
+            if(typeof confetti === 'function') confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+        });
+
+        document.getElementById('achchaBtn').addEventListener('click', () => {
+            feedbackGroup.style.display = 'none';
+            feedbackPopup.innerText = "Hehehe mere jaisa😹";
+            feedbackPopup.style.display = 'block';
+            replaysBtn.style.display = 'inline-block';
+            if(typeof confetti === 'function') confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+        });
+
+        replaysBtn.addEventListener('click', () => location.reload());
+    </script>
+</body>
+</html>
